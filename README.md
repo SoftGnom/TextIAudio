@@ -1,7 +1,3 @@
-# TextIAudio
-Sistema àgil, modular i 100% offline per a la síntesi de veu (TTS amb Piper) i transcripció d'àudio (STT amb VOSK) en contenidors Docker aïllats.
-
-
 # 🎙️ Text & Audio Processing Environment (Offline & Isolated)
 
 Aquest projecte proporciona un entorn de processament de veu i text completament **aïllat i local (offline)** utilitzant contenedors Podman / Docker. Està dissenyat per executar tasques de **Síntesi de Veu (Text-to-Speech - TTS)** i **Transcripció d'Àudio (Speech-to-Text - STT)** sense necessitat de connexió a Internet ni enviament de dades a serveis externs.
