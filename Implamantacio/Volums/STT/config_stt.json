@@ -1,0 +1,17 @@
+{
+  "models_dir": "/app/models/vosk",
+  "data_dir": "/data_io",
+  "default_language": "ca",
+  "languages": {
+    "ca": {
+      "model_folder": "vosk-model-small-ca-0.4"
+    },
+    "es": {
+      "model_folder": "vosk-model-small-es-0.42"
+    },
+    "en": {
+      "model_folder": "vosk-model-en-us-0.22"
+    }
+  },
+  "default_output_filename": "transcripcio.txt"
+}

@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # ===============================================
+  # SERVEI 1: TEXT-TO-SPEECH (TTS) - Piper
+  # ===============================================
+  tts_aillat:
+    container_name: TEXT-TO-SPEECH
+    build:
+      context: .
+      dockerfile: Dockerfile.piper
+    # AÏLLAMENT: Cap xarxa connectada a l'exterior
+    network_mode: none 
+    # ACCÉS A LA GPU (Necessari per accelerar Piper, si no vols GPU, elimina la línia)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    # VOLUMS: Per a les dades d'entrada i sortida
+    volumes:
+      - ./Volums/TTS:/app
+      - ./Volums/Models/piper:/app/models/piper
+      - ./Volums/data_io:/data_io
+      
+  # ===============================================
+  # SERVEI 2: SPEECH-TO-TEXT (STT) - VOSK
+  # ===============================================
+  stt_aillat:
+    container_name: SPEECH-TO-TEXT
+    build:
+      context: .
+      dockerfile: Dockerfile.vosk
+      no_cache: true
+    # AÏLLAMENT: Cap xarxa connectada a l'exterior
+    network_mode: none
+    # VOLUMS: Per a les dades d'entrada i sortida
+    volumes:
+      - ./Volums/STT:/app
+      - ./Volums/Models/vosk:/app/models/vosk
+      - ./Volums/data_io:/data_io
+
+# La secció 'networks' no s'especifica per evitar la creació d'una xarxa per defecte que podria donar accés a Internet.
+# Utilitzant 'network_mode: none' en cada servei, garantim l'aïllament.

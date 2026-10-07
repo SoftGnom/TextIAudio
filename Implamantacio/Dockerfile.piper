@@ -1,0 +1,26 @@
+# Dockerfile.piper
+FROM python:3.10-slim
+
+# Instal·la dependències del sistema i Piper
+RUN apt-get update && apt-get install -y \
+    wget \
+    sox \
+    libespeak-ng1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instal·la la llibreria Piper i la seva dependència onnxruntime (versió CPU)
+# (Si vols usar GPU, hauries de canviar a 'onnxruntime-gpu' aquí)
+RUN pip install piper-tts==1.2.0 onnxruntime
+
+WORKDIR /app
+
+# COPIA ELS MODELS OFFLINE
+# Hauries de modificar aquestes línies segons els models que hagis triat
+#COPY models/piper /app/models/piper
+
+# Aquesta és la comanda per executar la síntesi
+#ENTRYPOINT ["piper"]
+
+# Aquesta línia manté el contenidor actiu indefinidament
+# sense executar piper (ja que el cridem per separat amb 'docker-compose exec')
+CMD ["tail", "-f", "/dev/null"]
